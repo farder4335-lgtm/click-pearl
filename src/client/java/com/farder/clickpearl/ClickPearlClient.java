@@ -45,7 +45,7 @@ public class ClickPearlClient implements ClientModInitializer {
 
 		LocalPlayer player = mc.player;
 		MultiPlayerGameMode gameMode = mc.gameMode;
-		if (!pressed || player == null || gameMode == null || mc.screen != null) {
+		if (!pressed || player == null || gameMode == null || mc.gui.screen() != null) {
 			return;
 		}
 
