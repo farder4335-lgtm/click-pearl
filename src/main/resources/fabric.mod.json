@@ -1,0 +1,26 @@
+{
+	"schemaVersion": 1,
+	"id": "clickpearl",
+	"version": "${version}",
+	"name": "Click Pearl",
+	"description": "Throw an Ender Pearl with a single keybind or mouse button, without changing your held item.",
+	"authors": [
+		"farder4335-lgtm"
+	],
+	"contact": {
+		"sources": "https://github.com/farder4335-lgtm/click-pearl"
+	},
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.farder.clickpearl.ClickPearlClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
