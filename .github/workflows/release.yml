@@ -1,27 +1,25 @@
 name: release
 on:
-  push:
-    tags: ['v*']
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  jar:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
       - uses: actions/setup-java@v5
         with:
           java-version: '25'
           distribution: 'microsoft'
       - run: chmod +x ./gradlew
       - run: ./gradlew build
-      - name: publish release
+      - name: attach jar to release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "$GITHUB_REF_NAME" \
-            "build/libs/click-pearl-${GITHUB_REF_NAME#v}.jar" \
-            --title "Click Pearl $GITHUB_REF_NAME (Minecraft 26.2, Fabric)" \
-            --notes "Fabric mod for Minecraft 26.2. Requires Fabric Loader >= 0.20.1, Fabric API, Java 25."
+        run: gh release upload "${{ github.event.release.tag_name }}" build/libs/click-pearl-*[0-9].jar --repo "${{ github.repository }}"
